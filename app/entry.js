@@ -1,5 +1,8 @@
 'use strict';
 import $ from 'jquery';
+const global = Function('return this;')(); // グローバルオブジェクトを取得
+global.jQuery = $;
+import bootstrap from 'bootstrap';
 
 // each 関数で、各要素に対して引数 i は順番、 引数 e は HTML 要素が渡される関数を実行
 $('.availability-toggle-button').each((i, e) => {
@@ -18,6 +21,10 @@ $('.availability-toggle-button').each((i, e) => {
         button.data('availability', data.availability);
         const availabilityLabels = ['欠', '？', '出'];
         button.text(availabilityLabels[data.availability]);
+
+        const buttonStyles = ['btn-danger', 'btn-secondary', 'btn-success'];
+        button.removeClass('btn-danger btn-secondary btn-success');
+        button.addClass(buttonStyles[data.availability]);
       }
     );
   });
